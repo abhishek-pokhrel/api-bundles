@@ -1,11 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const fs = require('fs');
 
-router.get("/", async (req, res, next) => {
-  return res.status(200).json({
-    title: "Express Testing",
-    message: "The app is working properly!",
+express.set('view engine', 'ejs');
+
+router.get("/", (req, res) => {
+  fs.readFile(__dirname + '/public/index.html', 'utf8', (err, text) => {
+      res.send(text);
   });
-});
+})
 
 module.exports = router;
